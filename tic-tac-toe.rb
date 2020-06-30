@@ -1,8 +1,5 @@
 class Board
 
-
-    
-
     def initialize()
         @squares = [" ", " ", " ", " ", " ", " ", " ", " ", " "]
 
@@ -29,7 +26,7 @@ class Board
             if @squares[choice - 1] == " "
                 @squares[choice - 1] = "o"
                 display()
-                check_lines()
+                check_lines("o")
             else
                 puts "Please choose a valid square"
                 o_choice
@@ -44,7 +41,7 @@ class Board
             if @squares[choice - 1] == " "
                 @squares[choice - 1] = "x"
                 display()
-                check_lines()
+                check_lines("x")
             else
                 puts "Please choose a valid square"
                 x_choice
@@ -52,14 +49,9 @@ class Board
         end
     end
     
-    def check_lines
-        if @@wins.any? { |line| line.all? { |square| @squares[square] == "x" } }
-            puts "PLAYER X WINS!"
-            @won = true
-        end
-
-        if @@wins.any? { |line| line.all? { |square| @squares[square] == "o" } }
-            puts "PLAYER O WINS!"
+    def check_lines(player)
+        if @@wins.any? { |line| line.all? { |square| @squares[square] == player } }
+            puts "PLAYER #{player} WINS!"
             @won = true
         end
 
